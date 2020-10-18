@@ -20,7 +20,7 @@ public class Message_Tab {
     String password = "UserUser";
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         driver = WebDriverFactory.getDriver(browserType);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -30,17 +30,26 @@ public class Message_Tab {
         driver.findElement(By.xpath("//input[@type='submit']")).click();
     }
 
+
     @Test
-    public void verify_topic_icon(){
-        driver.findElement(By.xpath("//span[.='Message']")).click();
-        driver.findElement(By.xpath("//span[@title='Topic']")).click();
-        boolean topic_displayed = driver.findElement(By.xpath("//input[@id='POST_TITLE']")).isDisplayed();
+    public void uploadFile() {
 
-        Assert.assertTrue(topic_displayed,"topic box is not displayed");
-    }
+//    AC#3 -User should be able to attach link by clicking on the link icon.
+//    Given user is on CRM 24 dashboard
+        driver.findElement(By.xpath("//span[@id='logo_24_text']")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
+//    And user navigate to message tab
+        driver.findElement(By.xpath("//span[@id='feed-add-post-form-tab-message']/span")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        //    Then user clicks on Link icon
+        driver.findElement(By.xpath("//span[@class='bxhtmled-top-bar-btn bxhtmled-button-link']")).click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+//    Then user should able add Url and name of Link
+
+       driver.close();
+
+        }
     }
-}
